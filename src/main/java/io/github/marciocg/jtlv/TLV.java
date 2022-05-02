@@ -32,8 +32,7 @@ public final class TLV {
 	private final String value;
 
 	/**
-	 * 
-	 * Parameters are Strings 
+	 * Parameters are Strings as Hexadecimals
 	 * @param tag Tag name as Hexadecimal {@link String}
 	 * @param length Tag Length as Hexadecimal {@link String}
 	 * @param value Value as Hexadecimal {@link String}
@@ -43,15 +42,25 @@ public final class TLV {
 		this.length = length;
 		this.value = value;
 	}
-
+/**
+ * 
+ * @return tag
+ */
 	public String getTag() {
 		return tag;
 	}
-
+/**
+ * 
+ * @return length
+ */
 	public String getLength() {
 		return length;
 	}
 
+	/**
+	 * 
+	 * @return value
+	 */
 	public String getValue() {
 		return value;
 	}
@@ -60,12 +69,15 @@ public final class TLV {
 	public String toString() {
 		return "TLV [tag=" + tag + ", length=" + length + ", value=" + value + "]";
 	}	
-	
+	/**
+	 * Concatenates the tag, length and value into a primitive TLV as {@link String}
+	 * @return TLV {@link String}
+	 */
 	public String toStringPrimitive() {
 		return tag + length + value;
 	}
 /**
- * 
+ * Parses an unstructured {@link String} of BER-TLV
  * @param input A {@link String} that may contain one or more BER-TLV data
  * @return a {@link List} of {@link TLV}
  */
@@ -74,8 +86,8 @@ public final class TLV {
 		return parse(input_byte);
 	}
 /**
- * 
- * @param input A byte[] {@link Array} that may contain one or more BER-TLV data
+ * Parses an unstructured byte array of BER-TLV
+ * @param input A byte[] array that may contain one or more BER-TLV data
  * @return a {@link List} of {@link TLV}
  */
 	public static List<TLV> parse(byte[] input) {
@@ -140,9 +152,9 @@ public final class TLV {
 
 	}
 /**
- * 
+ * Formats a {@link List} of {@link TLV} into a byte array of BER-TLV
  * @param tlvList a {@link List} of {@link TLV}
- * @return A byte[] {@link Array}
+ * @return A byte[] array
  */
 	public static byte[] format(List<TLV> tlvList) {
 		

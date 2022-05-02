@@ -31,6 +31,10 @@ mvn package
 ```
 mvn site
 ```
+* Maven javadoc generation is broken, run the javadoc command and go to ./target/javadocsrc:
+```
+javadoc -d .\target\javadocsrc .\src\main\java\io\github\marciocg\jtlv\TLV.java
+```
 
 ## License
 
