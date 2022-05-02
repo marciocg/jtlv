@@ -25,9 +25,16 @@ mvn package
 * 0.1.0
     * Initial Release with parse
 
+## Documentation
+
+* Generate the maven site with javadoc under ./target/site directory
+```
+mvn site
+```
+
 ## License
 
-This project is licensed under the Apache License - see the LICENSE.md file for details
+This project is licensed under the Apache License 2.0 - see the LICENSE.md file for details
 
 ## Acknowledgments
 
