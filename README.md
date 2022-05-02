@@ -12,13 +12,15 @@ Simple library that parses BER-TLV (as String or byte array) into a TLV structur
 
 * Clone the repo
 ```
-git clone
+git clone https://github.com/marciocg/jtlv.git
 ```
 * Generate the jar package with maven
 ```
 mvn package
 ```
 * Import the jar to your project
+
+## Version History
 
 * 0.1.1
     * Included the format static method
@@ -33,7 +35,10 @@ mvn site
 ```
 * Maven javadoc generation is broken, run the javadoc command and go to ./target/javadocsrc:
 ```
+[windows]
 javadoc -d .\target\javadocsrc .\src\main\java\io\github\marciocg\jtlv\TLV.java
+[linux]
+javadoc -d ./target/javadocsrc ./src/main/java/io/github/marciocg/jtlv/TLV.java
 ```
 
 ## License
