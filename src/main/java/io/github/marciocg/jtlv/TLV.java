@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * A simple and immutable TLV Data Structure that handles tag, length and value as Strings.
  * @author marciocg
- * @version v0.1.1
+ * @version v0.2.0
  * @since 01/05/2022
  */
 public final class TLV {
@@ -40,6 +40,25 @@ public final class TLV {
 	public TLV(String tag, String length, String value) {
 		this.tag = tag;
 		this.length = length;
+		this.value = value;
+	}
+	/**
+	 * Parameters are Strings as Hexadecimals
+	 * @param tag Tag name as Hexadecimal {@link String}
+	 * @param value Value as Hexadecimal {@link String}
+	 */
+	public TLV(String tag, String value) {
+		if (value.length() % 2 != 0) {
+			throw new IllegalArgumentException("Data value length must be even.");
+
+		}
+		if ((value.length() / 2) > 4095) {
+			throw new IllegalArgumentException("Long argument of lengths not implemented, must be less than 4 bytes. Data value length must be less than 4096 bytes.");
+
+		}
+
+		this.tag = tag;
+		this.length = HexFormat.of().toHexDigits(value.length()/2).replace("00", "");
 		this.value = value;
 	}
 /**
