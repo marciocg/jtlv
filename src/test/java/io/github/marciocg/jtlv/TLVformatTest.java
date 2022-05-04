@@ -85,4 +85,15 @@ class TLVformatTest {
 
     }
 
+    @Test
+    void testFormatStringWithMultipleTLVlikeEMVbit55FieldAndHavingRepeatedTagNames() {
+		String str_val = "9F3303E02080950500000000009F3704A5CC06CF9F100706010A03A0B0009F26080562599501ED00039F3602010C82025C009F3704B5CC06CF9F3704C5CC06CF9F3704D5CC06CF9F02060000000010005F2A0208409F0306000000000000"; 
+        List<TLV> tlvList = TLV.parse(str_val);
+        byte[] tlvFormat = TLV.format(tlvList);
+
+        assertArrayEquals(tlvFormat, HexFormat.of().parseHex(str_val),
+               "Invalid TLV format");
+
+    }
+
 }
