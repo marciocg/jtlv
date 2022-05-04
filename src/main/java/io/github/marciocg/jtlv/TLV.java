@@ -55,10 +55,17 @@ public final class TLV {
 		if ((value.length() / 2) > 4095) {
 			throw new IllegalArgumentException("Long argument of lengths not implemented, must be less than 4 bytes. Data value length must be less than 4096 bytes.");
 
-		}
+		} else if ((value.length() / 2) > 255) {
+			this.length = "82" + HexFormat.of().toHexDigits(value.length()/2).replace("00", "");
 
+		} else if ((value.length() / 2) > 127) {
+			this.length = "81" + HexFormat.of().toHexDigits(value.length()/2).replace("00", "");
+
+		} else {
+			this.length = HexFormat.of().toHexDigits(value.length()/2).replace("00", "");
+		}
+		
 		this.tag = tag;
-		this.length = HexFormat.of().toHexDigits(value.length()/2).replace("00", "");
 		this.value = value;
 	}
 /**
