@@ -52,6 +52,7 @@ public final class TLV {
 			throw new IllegalArgumentException("Data value length must be even.");
 
 		}
+		
 		if ((value.length() / 2) > 4095) {
 			throw new IllegalArgumentException("Long argument of lengths not implemented, must be less than 4 bytes. Data value length must be less than 4096 bytes.");
 
