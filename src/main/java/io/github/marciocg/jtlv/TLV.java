@@ -20,7 +20,7 @@ import java.util.HexFormat;
 import java.util.List;
 
 /**
- * A simple TLV Data Structure that handles tag, length and value as Strings.
+ * A simple and immutable TLV Data Structure that handles tag, length and value as Strings.
  * @author marciocg
  * @version v0.1.1
  * @since 01/05/2022
@@ -43,14 +43,14 @@ public final class TLV {
 		this.value = value;
 	}
 /**
- * 
+ * Gets tag name as {@link String}
  * @return tag
  */
 	public String getTag() {
 		return tag;
 	}
 /**
- * 
+ * Gets length as {@link String}
  * @return length
  */
 	public String getLength() {
@@ -58,7 +58,7 @@ public final class TLV {
 	}
 
 	/**
-	 * 
+	 * Gets data value as {@link String}
 	 * @return value
 	 */
 	public String getValue() {
@@ -114,7 +114,6 @@ public final class TLV {
 			wk_len.delete(0, wk_len.length());
 
 			if (input[i] == 0) { 
-				// tag.append(HexFormat.of().toHexDigits(input[i]));
 				// Before, between, or after TLV-coded data objects, '00' bytes without any meaning may occur (for example, due to erased or modified TLV-coded data objects)
 				i++;
 				continue;
@@ -137,7 +136,6 @@ public final class TLV {
 			if ((128 & input[i]) == (128)) {
 				
 				lk = (127 & input[i]);
-				System.out.println("tam: " + (127 & input[i]) + " lk: " + lk);
 				//The value on the range b7-b1 represents the syze of the length argument, in bytes
 				if (lk > 3) {
 					throw new IllegalArgumentException("Long argument of lengths not implemented, must be less than 4 bytes.");
@@ -149,10 +147,7 @@ public final class TLV {
 				
 				lk_end = i + lk;
 				
-				System.out.println("lk_end: " + lk_end + " i:" + i );
-
 				for (lk = i; lk < lk_end; lk++) { // b8 = 1
-					System.out.println("lk:" + lk + " i:" + i );
 					len.append(HexFormat.of().toHexDigits(input[lk]));
 					wk_len.append(HexFormat.of().toHexDigits(input[lk]));
 					i++;
@@ -170,7 +165,6 @@ public final class TLV {
 				continue;
 			}
 
-			System.out.println(len + " ==? " + wk_len + " --- " + lk);
 			if ((wk_len.toString() != "") && !(len.toString().equals(wk_len.toString()))) {
 				lk_end = i + HexFormat.fromHexDigits(wk_len);
 			} else {
@@ -184,12 +178,18 @@ public final class TLV {
 				i++;
 			}
 
-			TLV debug = new TLV(tag.toString(), len.toString(), val.toString());
-			System.out.println(debug.toString()); 
+			//  TLV debug = new TLV(tag.toString(), len.toString(), val.toString());
+			//  System.out.println(debug.toString()); 
+
 			list_tlv.add(new TLV(tag.toString(), len.toString(), val.toString()));
-			// aqui o i está no próximo byte, pronto para recomeçar o loop
+			// the 'i' here is on the next byte, ready to restart the while loop
 		}
 
+		// var c = 0;
+		// for (TLV t : list_tlv) {
+		// 	System.out.println("c: " + c + " " + t.toString());
+		// 	c++;
+		// }
 		return list_tlv;
 
 	}
@@ -203,7 +203,6 @@ public final class TLV {
 		StringBuilder tlvStringBuilder = new StringBuilder();
 
 		for (TLV tlv : tlvList) {
-			System.out.println(tlv.getTag());
 			tlvStringBuilder.append(tlv.toStringPrimitive());
 		}
 		byte[] b = HexFormat.of().parseHex(tlvStringBuilder.toString());
