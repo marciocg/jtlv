@@ -3,9 +3,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.github.marciocg.jtlv</groupId>
+  <groupId>io.github.marciocg</groupId>
   <artifactId>jtlv</artifactId>
-  <version>0.1.1-SNAPSHOT</version>
+  <version>0.2.0-SNAPSHOT</version>
 
   <name>jtlv</name>
   <description> Simple library that parses BER-TLV (as String or byte array) into a TLV structure for easy handling.
@@ -94,6 +94,46 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+        <plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>3.4.0</version>
+					<configuration>
+						<doclint>none</doclint>
+						<failOnError>false</failOnError>
+						<notree>true</notree>
+						<source>17</source>
+						<doctitle>jtlv API</doctitle>
+						<windowtitle>jtvl API</windowtitle>
+						
+						<archive>
+							<manifestEntries>
+								<built-by>${project.organization.name}</built-by>
+							</manifestEntries>
+						</archive>
+					</configuration>
+					<executions>
+						<execution>
+							<id>attach-javadocs</id>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+        <plugin>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <version>4.6.0.2</version>
+          <dependencies>
+            <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
+            <dependency>
+              <groupId>com.github.spotbugs</groupId>
+              <artifactId>spotbugs</artifactId>
+              <version>4.7.0</version>
+            </dependency>
+          </dependencies>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
@@ -101,14 +141,27 @@
   <reporting>
     <plugins>
       <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>4.6.0.2</version>
+       
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.4.0</version>
-        <configuration>
-          <stylesheet>maven</stylesheet>
-          <show>public</show>
-        </configuration>
+        <reportSets>
+          <reportSet>
+      
+            <reports>
+              <report>javadoc</report>
+              <!-- <report>test-javadoc</report>-->
+            </reports>
+          </reportSet>
+   
+        </reportSets>
       </plugin>
     </plugins>
   </reporting>
+  
 </project>
