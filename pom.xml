@@ -121,12 +121,21 @@
 						</execution>
 					</executions>
 				</plugin>
+        <!--
         <plugin>
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
           <version>4.6.0.2</version>
+          <configuration>
+            <plugins>
+                <plugin>
+                    <groupId>com.h3xstream.findsecbugs</groupId>
+                    <artifactId>findsecbugs-plugin</artifactId>
+                    <version>1.12.0</version>
+                </plugin>
+            </plugins>
+        </configuration>
           <dependencies>
-            <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
             <dependency>
               <groupId>com.github.spotbugs</groupId>
               <artifactId>spotbugs</artifactId>
@@ -134,18 +143,22 @@
             </dependency>
           </dependencies>
         </plugin>
+      -->
+
       </plugins>
     </pluginManagement>
   </build>
 
   <reporting>
     <plugins>
+      <!-- 
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
         <version>4.6.0.2</version>
        
       </plugin>
+      -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
