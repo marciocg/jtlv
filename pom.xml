@@ -95,86 +95,48 @@
           <version>3.0.0</version>
         </plugin>
         <plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>3.4.0</version>
-					<configuration>
-						<doclint>none</doclint>
-						<failOnError>false</failOnError>
-						<notree>true</notree>
-						<source>17</source>
-						<doctitle>jtlv API</doctitle>
-						<windowtitle>jtvl API</windowtitle>
-						
-						<archive>
-							<manifestEntries>
-								<built-by>${project.organization.name}</built-by>
-							</manifestEntries>
-						</archive>
-					</configuration>
-					<executions>
-						<execution>
-							<id>attach-javadocs</id>
-							<goals>
-								<goal>jar</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-        <!--
-        <plugin>
-          <groupId>com.github.spotbugs</groupId>
-          <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>4.6.0.2</version>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.4.0</version>
           <configuration>
-            <plugins>
-                <plugin>
-                    <groupId>com.h3xstream.findsecbugs</groupId>
-                    <artifactId>findsecbugs-plugin</artifactId>
-                    <version>1.12.0</version>
-                </plugin>
-            </plugins>
-        </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>com.github.spotbugs</groupId>
-              <artifactId>spotbugs</artifactId>
-              <version>4.7.0</version>
-            </dependency>
-          </dependencies>
+            <doclint>none</doclint>
+            <failOnError>false</failOnError>
+            <show>private</show>
+            <nohelp>true</nohelp>
+            <notree>true</notree>
+            <source>17</source>
+            <doctitle>jtlv API</doctitle>
+            <windowtitle>jtvl API</windowtitle>
+            <archive>
+              <manifestEntries>
+                <built-by>${project.organization.name}</built-by>
+              </manifestEntries>
+            </archive>
+          </configuration>
+          <executions>
+            <execution>
+              <id>attach-javadocs</id>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
-      -->
-
       </plugins>
     </pluginManagement>
   </build>
 
   <reporting>
     <plugins>
-      <!-- 
-      <plugin>
-        <groupId>com.github.spotbugs</groupId>
-        <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>4.6.0.2</version>
-       
-      </plugin>
-      -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.4.0</version>
-        <reportSets>
-          <reportSet>
-      
-            <reports>
-              <report>javadoc</report>
-              <!-- <report>test-javadoc</report>-->
-            </reports>
-          </reportSet>
-   
-        </reportSets>
+        <configuration>
+          <show>public</show>
+        </configuration>
       </plugin>
     </plugins>
   </reporting>
-  
+
 </project>

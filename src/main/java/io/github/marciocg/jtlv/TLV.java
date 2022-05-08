@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * A simple and immutable TLV Data Structure that handles tag, length and value as Strings.
  * @author marciocg
- * @version v0.2.0
+ * @version v0.3.0
  * @since 01/05/2022
  */
 public final class TLV {
@@ -32,7 +32,7 @@ public final class TLV {
 	private final String value;
 
 	/**
-	 * Parameters are Strings as Hexadecimals
+	 * Takes the tag name, length and value data as Hexadecimals {@link String}s. This constructor is intended to be used only by the {@link parse} static method.
 	 * @param tag Tag name as Hexadecimal {@link String}
 	 * @param length Tag Length as Hexadecimal {@link String}
 	 * @param value Value as Hexadecimal {@link String}
@@ -43,7 +43,7 @@ public final class TLV {
 		this.value = value;
 	}
 	/**
-	 * Parameters are Strings as Hexadecimals
+	 * Takes the tag name and value data as Hexadecimals {@link String}s and calculates the length automatically. 
 	 * @param tag Tag name as Hexadecimal {@link String}
 	 * @param value Value as Hexadecimal {@link String}
 	 */
@@ -57,13 +57,13 @@ public final class TLV {
 			throw new IllegalArgumentException("Long argument of lengths not implemented, must be less than 4 bytes. Data value length must be less than 4096 bytes.");
 
 		} else if ((value.length() / 2) > 255) {
-			this.length = "82" + HexFormat.of().toHexDigits(value.length()/2).replace("00", "");
+			this.length = "82" + HexFormat.of().toHexDigits(value.length() / 2).replace("00", "");
 
 		} else if ((value.length() / 2) > 127) {
-			this.length = "81" + HexFormat.of().toHexDigits(value.length()/2).replace("00", "");
+			this.length = "81" + HexFormat.of().toHexDigits(value.length() / 2).replace("00", "");
 
 		} else {
-			this.length = HexFormat.of().toHexDigits(value.length()/2).replace("00", "");
+			this.length = HexFormat.of().toHexDigits(value.length() / 2).replace("00", "");
 		}
 		
 		this.tag = tag;
@@ -108,7 +108,7 @@ public final class TLV {
 		return tag + length + value;
 	}
 /**
- * Parses an unstructured {@link String} of BER-TLV
+ * Parses (decodes) an unstructured {@link String} of BER-TLV into a {@link List} of {@link TLV}s.
  * @param input A {@link String} that may contain one or more BER-TLV data
  * @return a {@link List} of {@link TLV}
  */
@@ -117,7 +117,7 @@ public final class TLV {
 		return parse(input_byte);
 	}
 /**
- * Parses an unstructured byte array of BER-TLV
+ * Parses (decodes) an unstructured byte array of BER-TLV into a {@link List} of {@link TLV}s.
  * @param input A byte[] array that may contain one or more BER-TLV data
  * @return a {@link List} of {@link TLV}
  */
@@ -212,16 +212,11 @@ public final class TLV {
 			// the 'i' here is on the next byte, ready to restart the while loop
 		}
 
-		// var c = 0;
-		// for (TLV t : list_tlv) {
-		// 	System.out.println("c: " + c + " " + t.toString());
-		// 	c++;
-		// }
 		return list_tlv;
 
 	}
 /**
- * Formats a {@link List} of {@link TLV} into a byte array of BER-TLV
+ * Formats (encodes) a {@link List} of {@link TLV} into a byte array of BER-TLV
  * @param tlvList a {@link List} of {@link TLV}
  * @return A byte[] array
  */
