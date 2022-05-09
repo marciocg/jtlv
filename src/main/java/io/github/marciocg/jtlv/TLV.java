@@ -192,7 +192,7 @@ public final class TLV {
 				continue;
 			}
 
-			if ((wk_len.toString() != "") && !(len.toString().equals(wk_len.toString()))) {
+			if ((!wk_len.toString().isEmpty()) && !(len.toString().equals(wk_len.toString()))) {
 				lk_end = i + HexFormat.fromHexDigits(wk_len);
 			} else {
 				lk_end = i + HexFormat.fromHexDigits(len);

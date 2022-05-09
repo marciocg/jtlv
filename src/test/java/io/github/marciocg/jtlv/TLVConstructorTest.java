@@ -59,7 +59,7 @@ class TLVConstructorTest {
         var value = "FAFAFAE";
 
 		assertThrows(IllegalArgumentException.class, 
-        () -> { new TLV("07", value.toString());});
+        () -> { new TLV("07", value);});
 
     }
 
