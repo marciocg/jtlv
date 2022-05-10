@@ -57,3 +57,5 @@ This project is licensed under the Apache License 2.0 - see the LICENSE.md file 
 Inspiration and references:
 * [BER Definition from Oracle](https://docs.oracle.com/cd/E19476-01/821-0510/def-basic-encoding-rules.html)
 * [EMV v4.3 Book 3](https://www.emvco.com/wp-content/uploads/2017/04/EMV_v4.3_Book_3_Application_Specification_20120607062110791.pdf)
+* [ITU-T RECOMMENDATION X.690](https://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf)
+* [A Layman's Guide to a Subset of ASN.1, BER, and DER](https://homepages.dcc.ufmg.br/~coelho/nm/asn.1.intro.pdf)
